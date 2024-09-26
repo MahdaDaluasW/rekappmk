@@ -1,42 +1,15 @@
 <?php
 include 'koneksi.php';
 
-$error = '';
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $input_username = $_POST['username'];
-    $input_password = $_POST['password'];
     $selection = $_POST['selection']; 
 
-    // Cek username dan password dari tabel users
-    $query = "SELECT * FROM users WHERE username = ?";
-    $stmt = $conn->prepare($query);
-    $stmt->bind_param("s", $input_username);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    if ($result->num_rows > 0) {
-        $user = $result->fetch_assoc();
-
-        // Verifikasi password
-        if (password_verify($input_password, $user['password'])) {
-            // Set session login
-            $_SESSION['logged_in'] = true;
-            $_SESSION['username'] = $user['username'];
-            
-            // Redirect based on selected user type
-            if ($selection == 'pmk') {
-                header("Location: displaypmk.php");
-            } elseif ($selection == 'pg') {
-                header("Location: displaypg.php");
-            }
-            exit();
-        } else {
-            $error = "Password salah.";
-        }
-    } else {
-        $error = "Username tidak ditemukan.";
+    if ($selection == 'pmk') {
+        header("Location: pmk/display-pmk.php");
+    } elseif ($selection == 'pg') {
+        header("Location: pg/display-pg.php");  
     }
+    exit();
 }
 
 $conn->close();
@@ -47,7 +20,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Pilih Data</title>
     <style>
         * {
             margin: 0;
@@ -69,19 +42,23 @@ $conn->close();
             border-radius: 12px;
             padding: 40px;
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            width: 350px;
+            width: 400px;
             text-align: center;
             animation: fadeIn 1s ease-in-out;
         }
 
         .login-container h1 {
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             color: #007bff;
             font-size: 24px;
             font-weight: bold;
         }
 
-        .login-container input,
+        .login-container img {
+            max-width: 80%;
+            margin-bottom: 20px;
+        }
+
         .login-container select {
             width: 100%;
             padding: 12px;
@@ -93,7 +70,6 @@ $conn->close();
             transition: border 0.3s ease;
         }
 
-        .login-container input:focus,
         .login-container select:focus {
             border-color: #007bff;
         }
@@ -113,11 +89,6 @@ $conn->close();
         .login-container button:hover {
             background-color: #0056b3;
             transform: scale(1.02);
-        }
-
-        .login-container .error-message {
-            color: red;
-            margin: 10px 0;
         }
 
         @keyframes fadeIn {
@@ -140,13 +111,10 @@ $conn->close();
 </head>
 <body>
     <div class="login-container">
-        <h1>Login</h1>
-        <?php if ($error): ?>
-            <div class="error-message"><?= $error ?></div>
-        <?php endif; ?>
+        <img src="images/logo-bkn.png" alt="Logo BKN" width="100px">
+        <!-- <img src="images/kanreg1-yogyakarta.png" alt="Kanreg 1 Yogyakarta" width="100px"> -->
+        <!-- <h1>Pilih Data</h1> -->
         <form method="POST" action="">
-            <input type="text" name="username" placeholder="Username" required>
-            <input type="password" name="password" placeholder="Password" required>
             <select name="selection" required>
                 <option value="pmk">PMK</option>
                 <option value="pg">PG</option>

@@ -1,7 +1,7 @@
 <?php
-include 'koneksi.php';
+include '../koneksi.php';
 
-require 'vendor/autoload.php'; // Menggunakan PhpSpreadsheet
+require '../vendor/autoload.php'; // Menggunakan PhpSpreadsheet
 
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -87,12 +87,12 @@ if (isset($_FILES['excelFile']) && $_FILES['excelFile']['error'] == UPLOAD_ERR_O
         $status = "gagal";
     }
 
-    // Redirect ke halaman display.php dengan status sebagai query parameter
-    header("Location: displaypmk.php?status=$status");
+    // Redirect ke halaman display-pmk.php dengan status sebagai query parameter
+    header("Location: display-pmk.php?status=$status");
     exit();
 } else {
-    // Redirect ke halaman display.php dengan status gagal jika tidak ada file yang diunggah
-    header("Location: displaypmk.php?status=gagal");
+    // Redirect ke halaman display-pmk.php dengan status gagal jika tidak ada file yang diunggah
+    header("Location: display-pmk.php?status=gagal");
     exit();
 }
 

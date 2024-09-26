@@ -1,5 +1,5 @@
 <?php 
-include 'koneksi.php';
+include '../koneksi.php';
 
 // Ambil status dari query parameter
 $status = isset($_GET['status']) ? $_GET['status'] : '';
@@ -412,7 +412,8 @@ $conn->close();
 <body>
 
     <h1>Data Verifikasi PMK</h1>
-    <a href="importpmk.php" class="button-link">Upload Excel</a>
+    <a href="import-pmk.php" class="button-link">Upload Excel</a>
+    <a href="../index.php" class="button-link">Home</a>
     <?php echo $statusMessage; ?>
 
     <div class="filter-form">

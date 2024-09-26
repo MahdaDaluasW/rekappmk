@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rekapitulasi Verifikasi PMK</title>
+    <title>Rekapitulasi Verifikasi PG</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -81,9 +81,9 @@
 </head>
 <body>
     <div class="container">
-        <h2>Rekapitulasi PMK</h2>
-        <a href="displaypmk.php" class="button-link">Lihat Data</a>
-        <form action="uploadpmk.php" method="post" enctype="multipart/form-data">
+        <h2>Rekapitulasi PG</h2>
+        <a href="display-pg.php" class="button-link">Lihat Data</a>
+        <form action="upload-pg.php" method="post" enctype="multipart/form-data">
             Pilih file Excel: 
             <input type="file" name="excelFile" accept=".xls,.xlsx" required>
             <input type="submit" value="Unggah">
